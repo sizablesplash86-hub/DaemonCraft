@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaemonCraft</title>
+    <style>
+        :root {
+            --bg-dark: #121214;
+            --bg-panel: #1a1a1e;
+            --bg-sidebar: #161619;
+            --border-color: #2a2a30;
+            --text-main: #e4e4e7;
+            --text-muted: #a1a1aa;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --accent-blue: #3b82f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        aside {
+            width: 240px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-brand {
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
+            color: #fff;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 15px 10px;
+        }
+
+        .sidebar-menu li {
+            padding: 10px 12px;
+            border-radius: 6px;
+            color: var(--text-muted);
+            cursor: pointer;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .sidebar-menu li:hover, .sidebar-menu li.active {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-panel);
+        }
+
+        header h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .content-body {
+            padding: 30px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            background-color: var(--border-color);
+            color: var(--text-main);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover { opacity: 0.85; }
+        .btn-green { background-color: var(--accent-green); color: #fff; }
+        .btn-red { background-color: var(--accent-red); color: #fff; }
+
+        /* Instance Grid */
+        .instance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .instance-card {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .instance-card.running { border-left: 4px solid var(--accent-green); }
+        .instance-card.idle { border-left: 4px solid var(--text-muted); }
+        .instance-card.error { border-left: 4px solid var(--accent-red); }
+
+        .card-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-title h3 {
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+
+        .card-title p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge.running { background-color: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+        .badge.idle { background-color: rgba(161, 161, 170, 0.15); color: var(--text-muted); }
+        .badge.error { background-color: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
+
+        .card-metrics {
+            padding: 0 16px 16px 16px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-metrics strong {
+            display: block;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            margin-top: 2px;
+        }
+
+        .card-actions {
+            padding: 12px 16px;
+            display: flex;
+            gap: 8px;
+            background-color: rgba(0,0,0,0.1);
+        }
+
+        .card-actions button {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .card-actions button:hover {
+            background-color: var(--border-color);
+        }
+
+        .create-card {
+            border: 2px dashed var(--border-color);
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .create-card:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .create-card span {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        /* Modal Overlay & Container */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside>
+        <div class="sidebar-brand">DaemonCraft</div>
+        <ul class="sidebar-menu">
+            <li class="active">Instances</li>
+            <li>Datastores</li>
+            <li>Schedule</li>
+            <li>Configuration</li>
+            <li>File Manager</li>
+            <li>Support & Logs</li>
+        </ul>
+    </aside>
+
+    <!-- Main View -->
+    <main>
+        <header>
+            <h1>Instances</h1>
+        </header>
+
+        <div class="content-body">
+            <!-- Global Toolbar -->
+            <div class="toolbar">
+                <button class="btn">Refresh</button>
+                <button class="btn btn-green">Start All</button>
+                <button class="btn btn-red">Stop All</button>
+                <button class="btn btn-green" style="margin-left: auto;">+ Create Instance</button>
+            </div>
+
+            <!-- Instances Grid -->
+            <div class="instance-grid">
+<!--                
+                <div class="instance-card running">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>example 1</h3>
+                            <p>Java Edition • Port 25565</p>
+                        </div>
+                        <span class="badge running">Running</span>
+                    </div>
+                    <div class="card-metrics">
+                        <div>CPU <strong>4.2%</strong></div>
+                        <div>RAM <strong>2.4 / 4 GB</strong></div>
+                        <div>Players <strong>3 / 20</strong></div>
+                    </div>
+                    <div class="card-actions">
+                        <button>Console</button>
+                        <button>Files</button>
+                        <button>Config</button>
+                        <button style="color: var(--accent-red);">Stop</button>
+                    </div>
+                </div>
+
+                <div class="instance-card idle">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>example 2</h3>
+                            <p>Fabric 1.20.4 • Port 25566</p>
+                        </div>
+                        <span class="badge idle">Idle</span>
+                    </div>
+                    <div class="card-metrics">
+                        <div>CPU <strong>0%</strong></div>
+                        <div>RAM <strong>0 GB</strong></div>
+                        <div>Players <strong>0 / 10</strong></div>
+                    </div>
+                    <div class="card-actions">
+                        <button>Console</button>
+                        <button>Files</button>
+                        <button style="color: var(--accent-green);">Start</button>
+                    </div>
+                </div>
+
+                <div class="instance-card error">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3>example 3</h3>
+                            <p>PaperMC • Port 25567</p>
+                        </div>
+                        <span class="badge error">Error</span>
+                    </div>
+                    <div class="card-metrics" style="grid-template-columns: 1fr;">
+                        <div>Status <strong>Exited with code 1 (Check logs)</strong></div>
+                    </div>
+                    <div class="card-actions">
+                        <button>View Logs</button>
+                        <button style="color: var(--accent-green);">Restart</button>
+                    </div>
+-->
+                </div>
+
+                <!-- Create New Card Placeholder -->
+                <div class="create-card">
+                    <span>+</span>
+                    <p>Create New Instance</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Instance Modal -->
+    <div id="createModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Minecraft Instance</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            
+            <form id="createInstanceForm">
+                <div class="form-group">
+                    <label>Instance Name</label>
+                    <input type="text" id="instanceNameInput" placeholder="e.g. Main Survival" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Game Edition</label>
+                    <select id="editionSelect">
+                        <option value="java">Java Edition</option>
+                        <option value="bedrock">Bedrock Edition</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Version</label>
+                    <select id="versionSelect">
+                        <!-- Dynamically changes based on Edition, or list defaults -->
+                        <option value="vanilla-26.3">Vanilla 26.3</option>
+                        <option value="paper-latest">Paper (Latest)</option>
+                        <option value="fabric-latest">Fabric (Latest)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Port Number</label>
+                    <input type="number" value="25565" required>
+                </div>
+
+                <div class="form-group">
+                    <label>World Seed (Optional)</label>
+                    <input type="text" placeholder="Leave blank for random seed">
+                </div>
+
+                <div class="form-group">
+                    <label>World Type</label>
+                    <select>
+                        <option value="default">Default</option>
+                        <option value="flat">Superflat</option>
+                        <option value="large-biomes">Large Biomes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox"> Enable Cheats
+                    </label>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn" id="cancelModal">Cancel</button>
+                    <button type="submit" class="btn btn-green" id="dynamicSubmitBtn">Create Instance</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('createModal');
+        const openBtn = document.querySelector('.create-card'); // Your existing create card
+        const closeBtn = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelModal');
+        const nameInput = document.getElementById('instanceNameInput');
+        const submitBtn = document.getElementById('dynamicSubmitBtn');
+        const editionSelect = document.getElementById('editionSelect');
+        const versionSelect = document.getElementById('versionSelect');
+
+        // Open Modal
+        openBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            nameInput.focus();
+        });
+
+        // Close Modal functions
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        
+        // Close when clicking outside the modal box
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Dynamic button naming: "Create __NAME__"
+        nameInput.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            if (val.length > 0) {
+                submitBtn.textContent = `Create ${val}`;
+            } else {
+                submitBtn.textContent = `Create Instance`;
+            }
+        });
+
+        // Toggle versions based on Java vs Bedrock selection
+        editionSelect.addEventListener('change', (e) => {
+            versionSelect.innerHTML = '';
+            if (e.target.value === 'java') {
+                versionSelect.innerHTML = `
+                    <option value="vanilla-26.3">Vanilla 26.3</option>
+                    <option value="paper-latest">Paper (Latest)</option>
+                    <option value="fabric-latest">Fabric (Latest)</option>
+                `;
+            } else {
+                versionSelect.innerHTML = `
+                    <option value="bedrock-latest">Bedrock Official (Latest)</option>
+                    <option value="niseman-latest">Niseman / BDS Proxy</option>
+                `;
+            }
+        });
+    </script>
+
+</body>
+</html>

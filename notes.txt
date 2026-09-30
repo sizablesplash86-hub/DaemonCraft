@@ -1,0 +1,17 @@
+cd build
+cmake --build .
+mv daemoncraft ..
+cd ..
+./daemoncraft
+
+
+# if doing first time
+
+# 1. Create a dedicated build directory to keep source code clean
+mkdir build && cd build
+
+# 2. Generate the build files (Makefile, Ninja, etc.)
+cmake ..
+
+# 3. Compile the code
+cmake --build .
