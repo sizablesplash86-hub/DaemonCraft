@@ -1,51 +1,15 @@
-// this is just an early version of SpyderFly slightly modified
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  this is just an early version of SpyderFly slightly modified *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include <stdio.h>
 #include "core.h"
 
 #define FILE_SIZE 1024
 #define STR_LEN 256
 
-void web(void)
+void web(int sockfd)
 {
-  int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-  if (sockfd < 0)
-  {
-    perror("Socket creation failed\n");
-    exit(EXIT_FAILURE);
-  }
-
-  int opt = 1;
-  if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
-  {
-    perror("setsockopt failed");
-    close(sockfd);
-    exit(EXIT_FAILURE);
-  }
-
-  struct sockaddr_in addr;
-  addr.sin_family = AF_INET;
-  int port_num = atoi(conf_port);
-  addr.sin_port = htons(port_num);
-  addr.sin_addr.s_addr = INADDR_ANY;
-
-  socket(AF_INET, SOCK_STREAM, 0);
-  int bind_status = bind(sockfd, (struct sockaddr *)&addr, sizeof(addr));
-  if (bind_status < 0)
-  {
-    perror("Failed to bind address\n");
-    close(sockfd);
-    exit(EXIT_FAILURE);
-  }
-
-  if (listen(sockfd, 10) < 0)
-  {
-    perror("Listen failed\n");
-    close(sockfd);
-    exit(EXIT_FAILURE);
-  }
-
-  printf("\nSpyderFly Web server upstream active! press ctrl+C to stop\n");
+  printf("\nDaemonCraft active on port %s! press ctrl+C to stop\n", conf_port);
   while(1)
   {
     int client_fd = accept(sockfd, NULL, NULL);

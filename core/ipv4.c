@@ -1,8 +1,6 @@
-#include <stdio.h>
-
 #include "core.h"
 
-void ipv4(void)
+void pubip(void)
 {
   FILE *fp;
   char ip_buffer[64];
@@ -21,7 +19,7 @@ void ipv4(void)
     // Strip the trailing newline character if it exists
     ip_buffer[strcspn(ip_buffer, "\n")] = 0;
 
-    printf("Captured IP Address: %s\n", ip_buffer);
+    // printf("Captured IP Address: %s\n", ip_buffer);
   }
   else fprintf(stderr, "Failed to read output from curl.\n");
 
@@ -29,5 +27,6 @@ void ipv4(void)
   int status = pclose(fp);
   if (status == -1) perror("Error closing pipe");
 
+  snprintf(ipv4, sizeof(ipv4), "%s", ip_buffer);
   return;
 }

@@ -8,10 +8,14 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/code-projects/packages/minecraft/daemoncraft.c" "CMakeFiles/daemoncraft.dir/daemoncraft.c.o" "gcc" "CMakeFiles/daemoncraft.dir/daemoncraft.c.o.d"
-  "/mnt/code-projects/packages/minecraft/lan_ip.c" "CMakeFiles/daemoncraft.dir/lan_ip.c.o" "gcc" "CMakeFiles/daemoncraft.dir/lan_ip.c.o.d"
-  "/mnt/code-projects/packages/minecraft/port.c" "CMakeFiles/daemoncraft.dir/port.c.o" "gcc" "CMakeFiles/daemoncraft.dir/port.c.o.d"
-  "/mnt/code-projects/packages/minecraft/web.c" "CMakeFiles/daemoncraft.dir/web.c.o" "gcc" "CMakeFiles/daemoncraft.dir/web.c.o.d"
+  "/mnt/code-projects/packages/minecraft/core/console_web-fusion.c" "CMakeFiles/daemoncraft.dir/core/console_web-fusion.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/console_web-fusion.c.o.d"
+  "/mnt/code-projects/packages/minecraft/core/crt_inst.c" "CMakeFiles/daemoncraft.dir/core/crt_inst.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/crt_inst.c.o.d"
+  "/mnt/code-projects/packages/minecraft/core/daemoncraft.c" "CMakeFiles/daemoncraft.dir/core/daemoncraft.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/daemoncraft.c.o.d"
+  "/mnt/code-projects/packages/minecraft/core/ip_bind.c" "CMakeFiles/daemoncraft.dir/core/ip_bind.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/ip_bind.c.o.d"
+  "/mnt/code-projects/packages/minecraft/core/ipv4.c" "CMakeFiles/daemoncraft.dir/core/ipv4.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/ipv4.c.o.d"
+  "/mnt/code-projects/packages/minecraft/core/lan_ip.c" "CMakeFiles/daemoncraft.dir/core/lan_ip.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/lan_ip.c.o.d"
+  "/mnt/code-projects/packages/minecraft/core/port.c" "CMakeFiles/daemoncraft.dir/core/port.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/port.c.o.d"
+  "/mnt/code-projects/packages/minecraft/core/web.c" "CMakeFiles/daemoncraft.dir/core/web.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/web.c.o.d"
   "" "daemoncraft" "gcc" "CMakeFiles/daemoncraft.dir/link.d"
   )
 

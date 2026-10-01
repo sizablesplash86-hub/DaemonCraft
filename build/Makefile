@@ -113,6 +113,7 @@ preinstall/fast:
 
 # clear depends
 depend:
+	$(CMAKE_COMMAND) -P /mnt/code-projects/packages/minecraft/build/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
@@ -129,101 +130,197 @@ daemoncraft/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/build
 .PHONY : daemoncraft/fast
 
-daemoncraft.o: daemoncraft.c.o
-.PHONY : daemoncraft.o
+core/console_web-fusion.o: core/console_web-fusion.c.o
+.PHONY : core/console_web-fusion.o
 
 # target to build an object file
-daemoncraft.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/daemoncraft.c.o
-.PHONY : daemoncraft.c.o
+core/console_web-fusion.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/console_web-fusion.c.o
+.PHONY : core/console_web-fusion.c.o
 
-daemoncraft.i: daemoncraft.c.i
-.PHONY : daemoncraft.i
+core/console_web-fusion.i: core/console_web-fusion.c.i
+.PHONY : core/console_web-fusion.i
 
 # target to preprocess a source file
-daemoncraft.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/daemoncraft.c.i
-.PHONY : daemoncraft.c.i
+core/console_web-fusion.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/console_web-fusion.c.i
+.PHONY : core/console_web-fusion.c.i
 
-daemoncraft.s: daemoncraft.c.s
-.PHONY : daemoncraft.s
+core/console_web-fusion.s: core/console_web-fusion.c.s
+.PHONY : core/console_web-fusion.s
 
 # target to generate assembly for a file
-daemoncraft.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/daemoncraft.c.s
-.PHONY : daemoncraft.c.s
+core/console_web-fusion.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/console_web-fusion.c.s
+.PHONY : core/console_web-fusion.c.s
 
-lan_ip.o: lan_ip.c.o
-.PHONY : lan_ip.o
+core/crt_inst.o: core/crt_inst.c.o
+.PHONY : core/crt_inst.o
 
 # target to build an object file
-lan_ip.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/lan_ip.c.o
-.PHONY : lan_ip.c.o
+core/crt_inst.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/crt_inst.c.o
+.PHONY : core/crt_inst.c.o
 
-lan_ip.i: lan_ip.c.i
-.PHONY : lan_ip.i
+core/crt_inst.i: core/crt_inst.c.i
+.PHONY : core/crt_inst.i
 
 # target to preprocess a source file
-lan_ip.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/lan_ip.c.i
-.PHONY : lan_ip.c.i
+core/crt_inst.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/crt_inst.c.i
+.PHONY : core/crt_inst.c.i
 
-lan_ip.s: lan_ip.c.s
-.PHONY : lan_ip.s
+core/crt_inst.s: core/crt_inst.c.s
+.PHONY : core/crt_inst.s
 
 # target to generate assembly for a file
-lan_ip.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/lan_ip.c.s
-.PHONY : lan_ip.c.s
+core/crt_inst.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/crt_inst.c.s
+.PHONY : core/crt_inst.c.s
 
-port.o: port.c.o
-.PHONY : port.o
+core/daemoncraft.o: core/daemoncraft.c.o
+.PHONY : core/daemoncraft.o
 
 # target to build an object file
-port.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/port.c.o
-.PHONY : port.c.o
+core/daemoncraft.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/daemoncraft.c.o
+.PHONY : core/daemoncraft.c.o
 
-port.i: port.c.i
-.PHONY : port.i
+core/daemoncraft.i: core/daemoncraft.c.i
+.PHONY : core/daemoncraft.i
 
 # target to preprocess a source file
-port.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/port.c.i
-.PHONY : port.c.i
+core/daemoncraft.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/daemoncraft.c.i
+.PHONY : core/daemoncraft.c.i
 
-port.s: port.c.s
-.PHONY : port.s
+core/daemoncraft.s: core/daemoncraft.c.s
+.PHONY : core/daemoncraft.s
 
 # target to generate assembly for a file
-port.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/port.c.s
-.PHONY : port.c.s
+core/daemoncraft.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/daemoncraft.c.s
+.PHONY : core/daemoncraft.c.s
 
-web.o: web.c.o
-.PHONY : web.o
+core/ip_bind.o: core/ip_bind.c.o
+.PHONY : core/ip_bind.o
 
 # target to build an object file
-web.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/web.c.o
-.PHONY : web.c.o
+core/ip_bind.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/ip_bind.c.o
+.PHONY : core/ip_bind.c.o
 
-web.i: web.c.i
-.PHONY : web.i
+core/ip_bind.i: core/ip_bind.c.i
+.PHONY : core/ip_bind.i
 
 # target to preprocess a source file
-web.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/web.c.i
-.PHONY : web.c.i
+core/ip_bind.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/ip_bind.c.i
+.PHONY : core/ip_bind.c.i
 
-web.s: web.c.s
-.PHONY : web.s
+core/ip_bind.s: core/ip_bind.c.s
+.PHONY : core/ip_bind.s
 
 # target to generate assembly for a file
-web.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/web.c.s
-.PHONY : web.c.s
+core/ip_bind.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/ip_bind.c.s
+.PHONY : core/ip_bind.c.s
+
+core/ipv4.o: core/ipv4.c.o
+.PHONY : core/ipv4.o
+
+# target to build an object file
+core/ipv4.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/ipv4.c.o
+.PHONY : core/ipv4.c.o
+
+core/ipv4.i: core/ipv4.c.i
+.PHONY : core/ipv4.i
+
+# target to preprocess a source file
+core/ipv4.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/ipv4.c.i
+.PHONY : core/ipv4.c.i
+
+core/ipv4.s: core/ipv4.c.s
+.PHONY : core/ipv4.s
+
+# target to generate assembly for a file
+core/ipv4.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/ipv4.c.s
+.PHONY : core/ipv4.c.s
+
+core/lan_ip.o: core/lan_ip.c.o
+.PHONY : core/lan_ip.o
+
+# target to build an object file
+core/lan_ip.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/lan_ip.c.o
+.PHONY : core/lan_ip.c.o
+
+core/lan_ip.i: core/lan_ip.c.i
+.PHONY : core/lan_ip.i
+
+# target to preprocess a source file
+core/lan_ip.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/lan_ip.c.i
+.PHONY : core/lan_ip.c.i
+
+core/lan_ip.s: core/lan_ip.c.s
+.PHONY : core/lan_ip.s
+
+# target to generate assembly for a file
+core/lan_ip.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/lan_ip.c.s
+.PHONY : core/lan_ip.c.s
+
+core/port.o: core/port.c.o
+.PHONY : core/port.o
+
+# target to build an object file
+core/port.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/port.c.o
+.PHONY : core/port.c.o
+
+core/port.i: core/port.c.i
+.PHONY : core/port.i
+
+# target to preprocess a source file
+core/port.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/port.c.i
+.PHONY : core/port.c.i
+
+core/port.s: core/port.c.s
+.PHONY : core/port.s
+
+# target to generate assembly for a file
+core/port.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/port.c.s
+.PHONY : core/port.c.s
+
+core/web.o: core/web.c.o
+.PHONY : core/web.o
+
+# target to build an object file
+core/web.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/web.c.o
+.PHONY : core/web.c.o
+
+core/web.i: core/web.c.i
+.PHONY : core/web.i
+
+# target to preprocess a source file
+core/web.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/web.c.i
+.PHONY : core/web.c.i
+
+core/web.s: core/web.c.s
+.PHONY : core/web.s
+
+# target to generate assembly for a file
+core/web.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/web.c.s
+.PHONY : core/web.c.s
 
 # Help Target
 help:
@@ -234,18 +331,30 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... daemoncraft"
-	@echo "... daemoncraft.o"
-	@echo "... daemoncraft.i"
-	@echo "... daemoncraft.s"
-	@echo "... lan_ip.o"
-	@echo "... lan_ip.i"
-	@echo "... lan_ip.s"
-	@echo "... port.o"
-	@echo "... port.i"
-	@echo "... port.s"
-	@echo "... web.o"
-	@echo "... web.i"
-	@echo "... web.s"
+	@echo "... core/console_web-fusion.o"
+	@echo "... core/console_web-fusion.i"
+	@echo "... core/console_web-fusion.s"
+	@echo "... core/crt_inst.o"
+	@echo "... core/crt_inst.i"
+	@echo "... core/crt_inst.s"
+	@echo "... core/daemoncraft.o"
+	@echo "... core/daemoncraft.i"
+	@echo "... core/daemoncraft.s"
+	@echo "... core/ip_bind.o"
+	@echo "... core/ip_bind.i"
+	@echo "... core/ip_bind.s"
+	@echo "... core/ipv4.o"
+	@echo "... core/ipv4.i"
+	@echo "... core/ipv4.s"
+	@echo "... core/lan_ip.o"
+	@echo "... core/lan_ip.i"
+	@echo "... core/lan_ip.s"
+	@echo "... core/port.o"
+	@echo "... core/port.i"
+	@echo "... core/port.s"
+	@echo "... core/web.o"
+	@echo "... core/web.i"
+	@echo "... core/web.s"
 .PHONY : help
 
 
@@ -257,6 +366,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
+	$(CMAKE_COMMAND) -P /mnt/code-projects/packages/minecraft/build/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

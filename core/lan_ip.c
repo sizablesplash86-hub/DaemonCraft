@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <ifaddrs.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
 #include "core.h"
 
 void ip(void)

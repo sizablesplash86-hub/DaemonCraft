@@ -2,10 +2,14 @@ daemoncraft: \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o \
-  CMakeFiles/daemoncraft.dir/daemoncraft.c.o \
-  CMakeFiles/daemoncraft.dir/web.c.o \
-  CMakeFiles/daemoncraft.dir/lan_ip.c.o \
-  CMakeFiles/daemoncraft.dir/port.c.o \
+  CMakeFiles/daemoncraft.dir/core/console_web-fusion.c.o \
+  CMakeFiles/daemoncraft.dir/core/crt_inst.c.o \
+  CMakeFiles/daemoncraft.dir/core/daemoncraft.c.o \
+  CMakeFiles/daemoncraft.dir/core/ip_bind.c.o \
+  CMakeFiles/daemoncraft.dir/core/ipv4.c.o \
+  CMakeFiles/daemoncraft.dir/core/lan_ip.c.o \
+  CMakeFiles/daemoncraft.dir/core/port.c.o \
+  CMakeFiles/daemoncraft.dir/core/web.c.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so \
@@ -34,13 +38,21 @@ daemoncraft: \
 
 /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o:
 
-CMakeFiles/daemoncraft.dir/daemoncraft.c.o:
+CMakeFiles/daemoncraft.dir/core/console_web-fusion.c.o:
 
-CMakeFiles/daemoncraft.dir/web.c.o:
+CMakeFiles/daemoncraft.dir/core/crt_inst.c.o:
 
-CMakeFiles/daemoncraft.dir/lan_ip.c.o:
+CMakeFiles/daemoncraft.dir/core/daemoncraft.c.o:
 
-CMakeFiles/daemoncraft.dir/port.c.o:
+CMakeFiles/daemoncraft.dir/core/ip_bind.c.o:
+
+CMakeFiles/daemoncraft.dir/core/ipv4.c.o:
+
+CMakeFiles/daemoncraft.dir/core/lan_ip.c.o:
+
+CMakeFiles/daemoncraft.dir/core/port.c.o:
+
+CMakeFiles/daemoncraft.dir/core/web.c.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a:
 

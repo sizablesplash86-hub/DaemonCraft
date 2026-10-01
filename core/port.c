@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "core.h"
 
 #define FILE_SIZE 1024
