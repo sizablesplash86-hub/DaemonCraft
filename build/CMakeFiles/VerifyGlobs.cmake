@@ -3,7 +3,7 @@
 cmake_policy(SET CMP0009 NEW)
 
 # CORE_SOURCES at CMakeLists.txt:11 (file)
-file(GLOB NEW_GLOB LIST_DIRECTORIES true "/mnt/code-projects/packages/minecraft/core/*.c")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/mnt/code-projects/packages/minecraft/core/*.c")
 set(OLD_GLOB
   "/mnt/code-projects/packages/minecraft/core/console_web-fusion.c"
   "/mnt/code-projects/packages/minecraft/core/crt_inst.c"
@@ -12,6 +12,7 @@ set(OLD_GLOB
   "/mnt/code-projects/packages/minecraft/core/ipv4.c"
   "/mnt/code-projects/packages/minecraft/core/lan_ip.c"
   "/mnt/code-projects/packages/minecraft/core/port.c"
+  "/mnt/code-projects/packages/minecraft/core/upnp.c"
   "/mnt/code-projects/packages/minecraft/core/web.c"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

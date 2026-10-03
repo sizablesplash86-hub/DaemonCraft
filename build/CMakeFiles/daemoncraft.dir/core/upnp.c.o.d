@@ -1,6 +1,7 @@
-CMakeFiles/daemoncraft.dir/core/port.c.o: \
- /mnt/code-projects/packages/minecraft/core/port.c \
- /usr/include/stdc-predef.h /usr/include/daemoncraft/core.h \
+CMakeFiles/daemoncraft.dir/core/upnp.c.o: \
+ /mnt/code-projects/packages/minecraft/core/upnp.c \
+ /usr/include/stdc-predef.h \
+ /mnt/code-projects/packages/minecraft/include/core.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

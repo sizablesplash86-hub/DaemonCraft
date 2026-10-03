@@ -1,11 +1,10 @@
-#include "core.h"
+#include <daemoncraft/core.h>
 
 void pubip(void)
 {
   FILE *fp;
   char ip_buffer[64];
 
-  // Open the command for reading
   fp = popen("curl -s -4 ifconfig.me", "r");
   if (fp == NULL)
   {
@@ -13,17 +12,9 @@ void pubip(void)
     return;
   }
 
-  // Read the output into the buffer
-  if (fgets(ip_buffer, sizeof(ip_buffer), fp) != NULL)
-  {
-    // Strip the trailing newline character if it exists
-    ip_buffer[strcspn(ip_buffer, "\n")] = 0;
-
-    // printf("Captured IP Address: %s\n", ip_buffer);
-  }
+  if (fgets(ip_buffer, sizeof(ip_buffer), fp) != NULL) ip_buffer[strcspn(ip_buffer, "\n")] = 0;
   else fprintf(stderr, "Failed to read output from curl.\n");
 
-  // Close the file pointer
   int status = pclose(fp);
   if (status == -1) perror("Error closing pipe");
 

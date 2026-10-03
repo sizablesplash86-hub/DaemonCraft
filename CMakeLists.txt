@@ -8,7 +8,8 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Automatically collect all .c files in the core directory
-file(GLOB CORE_SOURCES CONFIGURE_DEPENDS "core/*.c")
+file(GLOB_RECURSE CORE_SOURCES CONFIGURE_DEPENDS "core/*.c")
 
 # Create the executable from the collected core sources
 add_executable(daemoncraft ${CORE_SOURCES})
+target_include_directories(daemoncraft PRIVATE include)

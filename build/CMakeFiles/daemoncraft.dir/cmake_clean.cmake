@@ -14,6 +14,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/daemoncraft.dir/core/lan_ip.c.o.d"
   "CMakeFiles/daemoncraft.dir/core/port.c.o"
   "CMakeFiles/daemoncraft.dir/core/port.c.o.d"
+  "CMakeFiles/daemoncraft.dir/core/upnp.c.o"
+  "CMakeFiles/daemoncraft.dir/core/upnp.c.o.d"
   "CMakeFiles/daemoncraft.dir/core/web.c.o"
   "CMakeFiles/daemoncraft.dir/core/web.c.o.d"
   "daemoncraft"

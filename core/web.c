@@ -1,5 +1,6 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *  this is just an early version of SpyderFly slightly modified *
+ *   this branched on 9/30 and this is now unused but left in    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "core.h"

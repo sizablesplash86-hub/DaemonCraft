@@ -1,4 +1,4 @@
-#include "core.h"
+#include <daemoncraft/core.h>
 
 void ip(void)
 {

@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = 
+C_INCLUDES = -I/mnt/code-projects/packages/minecraft/include
 
 C_FLAGS = -std=gnu11
 

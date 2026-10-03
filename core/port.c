@@ -1,4 +1,4 @@
-#include "core.h"
+#include <daemoncraft/core.h>
 
 #define FILE_SIZE 1024
 #define STR_LEN 256
@@ -35,6 +35,5 @@ void findport(void)
     printf("\nPort not found\n\n");
     return;
   }
-  // Inside findport() after cleaning up the port string:
   snprintf(conf_port, sizeof(conf_port), "%s", port);
 }

@@ -1,8 +1,8 @@
-#include "core.h"
+#include <daemoncraft/core.h>
 
 void run_daemoncraft_monolith(int sockfd)
 {
-  printf("\nDaemonCraft monolith active! Web upstream + CLI console running.\n");
+  printf("\nDaemonCraft Active!\n\n");
   printf("Type commands below (e.g., 'stop [instancename]'):\nOr run 'exit' to stop DaemonCraft\n>>> ");
   fflush(stdout);
 
@@ -10,16 +10,9 @@ void run_daemoncraft_monolith(int sockfd)
   {
     fd_set read_fds;
     FD_ZERO(&read_fds);
-        
-    // Monitor standard input (keyboard / terminal console)
     FD_SET(STDIN_FILENO, &read_fds);
-        
-    // Monitor the web server listening socket for incoming browser connections
     FD_SET(sockfd, &read_fds);
-
     int max_fd = (sockfd > STDIN_FILENO) ? sockfd : STDIN_FILENO;
-
-    // select() blocks until activity happens on EITHER the web socket or the keyboard
     int activity = select(max_fd + 1, &read_fds, NULL, NULL, NULL);
 
     if (activity < 0)
@@ -28,14 +21,18 @@ void run_daemoncraft_monolith(int sockfd)
       break;
     }
 
-    // 1. Check if there is keyboard input in the terminal console
     if (FD_ISSET(STDIN_FILENO, &read_fds))
     {
-      char cmd[256];
       if (fgets(cmd, sizeof(cmd), stdin) != NULL)
       {
-        // Remove trailing newline
         cmd[strcspn(cmd, "\r\n")] = 0;
+
+        if (strncmp(cmd, "start ", 6) == 0)
+        {
+          char *instance_name = cmd + 6;
+          printf("starting instance: %s...\n", instance_name);
+          // TODO: Send graceful stop to that specific Minecraft process pipe
+        } 
 
         if (strncmp(cmd, "stop ", 5) == 0)
         {
@@ -48,13 +45,70 @@ void run_daemoncraft_monolith(int sockfd)
           printf("Shutting down DaemonCraft monolith.\n");
           break;
         }
+
+        // this is what I'm working on
+        else if (strncmp(cmd, "create ", 5) == 0)
+        {
+          char port [6];
+          char edition[64];
+          char version[STR_LEN];
+          char mod[32];
+          char min[4];
+          char max[4];
+          char *instance_name = cmd + 7;
+          printf("Creating %s instance...\n", instance_name);
+          
+          printf("Java or Bedrock (type in lowercase): ");
+          fgets(edition, sizeof(edition), stdin);
+          edition[strcspn(edition, "\r\n")] = 0;
+
+          if (strcmp(edition, "java") == 0)
+          {
+            printf("Enter Java version: ");
+            fgets(version, sizeof(version), stdin);
+            version[strcspn(version, "\r\n")] = 0;
+
+            printf("Enter mod loader (or type vanilla): ");
+            fgets(mod, sizeof(mod), stdin);
+            mod[strcspn(mod, "\r\n")] = 0;
+
+            printf("Enter minimium ram allocation: ");
+            fgets(min, sizeof(min), stdin);
+            min[strcspn(min, "\r\n")] = 0;
+
+            printf("Enter maximum ram allocation: ");
+            fgets(max, sizeof(max), stdin);
+            max[strcspn(max, "\r\n")] = 0;
+          }
+
+          if (strcmp(edition, "bedrock") == 0)
+          {
+            printf("Latest or preview (type in lowercase): ");
+            fgets(version, sizeof(version), stdin);
+            version[strcspn(version, "\r\n")] = 0;
+            snprintf(mod, sizeof(mod), "n/a");
+          }
+
+          // fix this part
+/*
+          else if (strlen(edition) > 0)
+          {
+            printf("Error! Enter Java or Bedrock\n>>>");
+            continue;
+          }
+*/
+          printf("Enter port number: ");
+          fgets(port, sizeof(port), stdin);
+          port[strcspn(port, "\r\n")] = 0;
+            
+          create_minecraft_instance(instance_name, port, edition, version, mod, min, max);
+        }
         else if (strlen(cmd) > 0) printf("Unknown command: '%s'. Try 'stop [name]'.\n", cmd);
       }
       printf(">>> ");
       fflush(stdout);
     }
 
-    // 2. Check if a web browser is trying to connect to your upstream
     if (FD_ISSET(sockfd, &read_fds))
     {
       int client_fd = accept(sockfd, NULL, NULL);
@@ -63,10 +117,10 @@ void run_daemoncraft_monolith(int sockfd)
         char request[1024];
         read(client_fd, request, sizeof(request) - 1);
 
-        // Quick router check for your web UI / API
-        // Inside your select loop where POST /api/create is handled:
         if (strncmp(request, "POST /api/create", 16) == 0)
         {
+          // this is for the create via web; it needs a rewrite
+
           // Find the body of the POST request (after \r\n\r\n)
           char *body = strstr(request, "\r\n\r\n");
           if (body != NULL)
@@ -81,21 +135,31 @@ void run_daemoncraft_monolith(int sockfd)
             char *name_ptr = strstr(body, "name=");
             if (name_ptr) sscanf(name_ptr, "name=%127[^&]", inst_name);
 
-            // Trigger the folder and config creation!
-            create_minecraft_instance(inst_name, 25565, "java", "vanilla-26.3");
+          //  create_minecraft_instance(instance_name, port, edition, version, mod, min, max);   // change this for the JS HTML
           }
 
             // Respond back to the browser so it knows it succeeded
             char *res = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"status\":\"success\"}";
             write(client_fd, res, strlen(res));
+
+          printf("Not working\n");
         }
+
         else
         {
-          // Serve index.html dashboard properly
-          char *root = "/home/daemoncraft/web";
-          char file_to_serve[STR_LEN];
-          snprintf(file_to_serve, sizeof(file_to_serve), "%s/index.html", root);
+          char method[16], uri[STR_LEN], protocol[16];
+          sscanf(request, "%s %s %s", method, uri, protocol);
 
+          char *root = "/home/daemoncraft";
+          char file_to_serve[STR_LEN * 2];
+
+          if (strcmp(uri, "/") == 0) snprintf(file_to_serve, sizeof(file_to_serve), "%s/index.html", root);
+          else 
+          {
+            size_t len = strlen(uri);
+            if (uri[len - 1] == '/') snprintf(file_to_serve, sizeof(file_to_serve), "%s%sindex.html", root, uri);
+            else snprintf(file_to_serve, sizeof(file_to_serve), "%s%s", root, uri);
+          }
           FILE *fts = fopen(file_to_serve, "r");
           if (fts != NULL)
           {
@@ -104,19 +168,23 @@ void run_daemoncraft_monolith(int sockfd)
 
             char file_buffer[1024];
             size_t bytes_read;
-            while ((bytes_read = fread(file_buffer, 1, sizeof(file_buffer), fts)) > 0)
-            {
-              write(client_fd, file_buffer, bytes_read);
-            }
+            while ((bytes_read = fread(file_buffer, 1, sizeof(file_buffer), fts)) > 0) write(client_fd, file_buffer, bytes_read);
             fclose(fts);
           }
           else
-          {
-            char *not_found = "HTTP/1.1 404 Not Found\r\nContent-Type: text/plain\r\n\r\n404 Index Not Found";
+          {  // if sub-folder exists & index doesn't, white screen. Fix that somehow later... add a part for auto index
+            char *not_found = 
+              "HTTP/1.1 404 Not Found\r\n"
+              "Content-Type: text/html; charset=UTF-8\r\n"
+              "Connection: close\r\n\r\n"
+              "<html><head><title>SpyderFly Site Not Found</title></head>"
+              "<body><center><h1>SpyderFly Site Not Found</h1></center>"
+              "<center>DaemonCraft is a branch of SpyderFly. Visit <a href=\"https://spyderfly.sizablesplash.com/support/\">https://spyderfly.sizablesplash.com/support/</a> for support</center></body></html>";
+
             write(client_fd, not_found, strlen(not_found));
           }
+          close(client_fd);
         }
-        close(client_fd);
       }
     }
   }

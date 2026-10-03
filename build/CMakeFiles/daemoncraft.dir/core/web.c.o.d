@@ -1,7 +1,8 @@
 CMakeFiles/daemoncraft.dir/core/web.c.o: \
  /mnt/code-projects/packages/minecraft/core/web.c \
  /usr/include/stdc-predef.h \
- /mnt/code-projects/packages/minecraft/core/core.h /usr/include/stdio.h \
+ /mnt/code-projects/packages/minecraft/include/core.h \
+ /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \

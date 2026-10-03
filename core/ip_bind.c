@@ -1,4 +1,4 @@
-#include "core.h"
+#include <daemoncraft/core.h>
 
 void ip_bind(void)
 {
@@ -34,7 +34,7 @@ void ip_bind(void)
     // change here when testing
 
   run_daemoncraft_monolith(sockfd);
-//  web(sockfd);
+//  web(sockfd);  // not needed anymore, leaving for reference
 
   close(sockfd);
   return;

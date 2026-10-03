@@ -298,6 +298,30 @@ core/port.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/port.c.s
 .PHONY : core/port.c.s
 
+core/upnp.o: core/upnp.c.o
+.PHONY : core/upnp.o
+
+# target to build an object file
+core/upnp.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/upnp.c.o
+.PHONY : core/upnp.c.o
+
+core/upnp.i: core/upnp.c.i
+.PHONY : core/upnp.i
+
+# target to preprocess a source file
+core/upnp.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/upnp.c.i
+.PHONY : core/upnp.c.i
+
+core/upnp.s: core/upnp.c.s
+.PHONY : core/upnp.s
+
+# target to generate assembly for a file
+core/upnp.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/upnp.c.s
+.PHONY : core/upnp.c.s
+
 core/web.o: core/web.c.o
 .PHONY : core/web.o
 
@@ -352,6 +376,9 @@ help:
 	@echo "... core/port.o"
 	@echo "... core/port.i"
 	@echo "... core/port.s"
+	@echo "... core/upnp.o"
+	@echo "... core/upnp.i"
+	@echo "... core/upnp.s"
 	@echo "... core/web.o"
 	@echo "... core/web.i"
 	@echo "... core/web.s"

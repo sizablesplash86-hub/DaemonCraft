@@ -1,5 +1,5 @@
-CMakeFiles/daemoncraft.dir/core/port.c.o: \
- /mnt/code-projects/packages/minecraft/core/port.c \
+CMakeFiles/daemoncraft.dir/core/root.c.o: \
+ /mnt/code-projects/packages/minecraft/core/root.c \
  /usr/include/stdc-predef.h /usr/include/daemoncraft/core.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
