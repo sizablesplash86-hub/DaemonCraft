@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/code-projects/packages/minecraft/core/ipv4.c" "CMakeFiles/daemoncraft.dir/core/ipv4.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/ipv4.c.o.d"
   "/mnt/code-projects/packages/minecraft/core/lan_ip.c" "CMakeFiles/daemoncraft.dir/core/lan_ip.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/lan_ip.c.o.d"
   "/mnt/code-projects/packages/minecraft/core/port.c" "CMakeFiles/daemoncraft.dir/core/port.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/port.c.o.d"
+  "/mnt/code-projects/packages/minecraft/core/start_inst.c" "CMakeFiles/daemoncraft.dir/core/start_inst.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/start_inst.c.o.d"
   "/mnt/code-projects/packages/minecraft/core/upnp.c" "CMakeFiles/daemoncraft.dir/core/upnp.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/upnp.c.o.d"
   "/mnt/code-projects/packages/minecraft/core/web.c" "CMakeFiles/daemoncraft.dir/core/web.c.o" "gcc" "CMakeFiles/daemoncraft.dir/core/web.c.o.d"
   "" "daemoncraft" "gcc" "CMakeFiles/daemoncraft.dir/link.d"

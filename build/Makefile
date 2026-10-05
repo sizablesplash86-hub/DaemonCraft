@@ -298,6 +298,30 @@ core/port.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/port.c.s
 .PHONY : core/port.c.s
 
+core/start_inst.o: core/start_inst.c.o
+.PHONY : core/start_inst.o
+
+# target to build an object file
+core/start_inst.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/start_inst.c.o
+.PHONY : core/start_inst.c.o
+
+core/start_inst.i: core/start_inst.c.i
+.PHONY : core/start_inst.i
+
+# target to preprocess a source file
+core/start_inst.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/start_inst.c.i
+.PHONY : core/start_inst.c.i
+
+core/start_inst.s: core/start_inst.c.s
+.PHONY : core/start_inst.s
+
+# target to generate assembly for a file
+core/start_inst.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/daemoncraft.dir/build.make CMakeFiles/daemoncraft.dir/core/start_inst.c.s
+.PHONY : core/start_inst.c.s
+
 core/upnp.o: core/upnp.c.o
 .PHONY : core/upnp.o
 
@@ -376,6 +400,9 @@ help:
 	@echo "... core/port.o"
 	@echo "... core/port.i"
 	@echo "... core/port.s"
+	@echo "... core/start_inst.o"
+	@echo "... core/start_inst.i"
+	@echo "... core/start_inst.s"
 	@echo "... core/upnp.o"
 	@echo "... core/upnp.i"
 	@echo "... core/upnp.s"

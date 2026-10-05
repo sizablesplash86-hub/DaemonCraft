@@ -170,10 +170,24 @@ CMakeFiles/daemoncraft.dir/core/port.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/daemoncraft.dir/core/port.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/code-projects/packages/minecraft/core/port.c -o CMakeFiles/daemoncraft.dir/core/port.c.s
 
+CMakeFiles/daemoncraft.dir/core/start_inst.c.o: CMakeFiles/daemoncraft.dir/flags.make
+CMakeFiles/daemoncraft.dir/core/start_inst.c.o: /mnt/code-projects/packages/minecraft/core/start_inst.c
+CMakeFiles/daemoncraft.dir/core/start_inst.c.o: CMakeFiles/daemoncraft.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/code-projects/packages/minecraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/daemoncraft.dir/core/start_inst.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/daemoncraft.dir/core/start_inst.c.o -MF CMakeFiles/daemoncraft.dir/core/start_inst.c.o.d -o CMakeFiles/daemoncraft.dir/core/start_inst.c.o -c /mnt/code-projects/packages/minecraft/core/start_inst.c
+
+CMakeFiles/daemoncraft.dir/core/start_inst.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/daemoncraft.dir/core/start_inst.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/code-projects/packages/minecraft/core/start_inst.c > CMakeFiles/daemoncraft.dir/core/start_inst.c.i
+
+CMakeFiles/daemoncraft.dir/core/start_inst.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/daemoncraft.dir/core/start_inst.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/code-projects/packages/minecraft/core/start_inst.c -o CMakeFiles/daemoncraft.dir/core/start_inst.c.s
+
 CMakeFiles/daemoncraft.dir/core/upnp.c.o: CMakeFiles/daemoncraft.dir/flags.make
 CMakeFiles/daemoncraft.dir/core/upnp.c.o: /mnt/code-projects/packages/minecraft/core/upnp.c
 CMakeFiles/daemoncraft.dir/core/upnp.c.o: CMakeFiles/daemoncraft.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/code-projects/packages/minecraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/daemoncraft.dir/core/upnp.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/code-projects/packages/minecraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/daemoncraft.dir/core/upnp.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/daemoncraft.dir/core/upnp.c.o -MF CMakeFiles/daemoncraft.dir/core/upnp.c.o.d -o CMakeFiles/daemoncraft.dir/core/upnp.c.o -c /mnt/code-projects/packages/minecraft/core/upnp.c
 
 CMakeFiles/daemoncraft.dir/core/upnp.c.i: cmake_force
@@ -187,7 +201,7 @@ CMakeFiles/daemoncraft.dir/core/upnp.c.s: cmake_force
 CMakeFiles/daemoncraft.dir/core/web.c.o: CMakeFiles/daemoncraft.dir/flags.make
 CMakeFiles/daemoncraft.dir/core/web.c.o: /mnt/code-projects/packages/minecraft/core/web.c
 CMakeFiles/daemoncraft.dir/core/web.c.o: CMakeFiles/daemoncraft.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/code-projects/packages/minecraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/daemoncraft.dir/core/web.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/code-projects/packages/minecraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/daemoncraft.dir/core/web.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/daemoncraft.dir/core/web.c.o -MF CMakeFiles/daemoncraft.dir/core/web.c.o.d -o CMakeFiles/daemoncraft.dir/core/web.c.o -c /mnt/code-projects/packages/minecraft/core/web.c
 
 CMakeFiles/daemoncraft.dir/core/web.c.i: cmake_force
@@ -207,6 +221,7 @@ daemoncraft_OBJECTS = \
 "CMakeFiles/daemoncraft.dir/core/ipv4.c.o" \
 "CMakeFiles/daemoncraft.dir/core/lan_ip.c.o" \
 "CMakeFiles/daemoncraft.dir/core/port.c.o" \
+"CMakeFiles/daemoncraft.dir/core/start_inst.c.o" \
 "CMakeFiles/daemoncraft.dir/core/upnp.c.o" \
 "CMakeFiles/daemoncraft.dir/core/web.c.o"
 
@@ -220,12 +235,13 @@ daemoncraft: CMakeFiles/daemoncraft.dir/core/ip_bind.c.o
 daemoncraft: CMakeFiles/daemoncraft.dir/core/ipv4.c.o
 daemoncraft: CMakeFiles/daemoncraft.dir/core/lan_ip.c.o
 daemoncraft: CMakeFiles/daemoncraft.dir/core/port.c.o
+daemoncraft: CMakeFiles/daemoncraft.dir/core/start_inst.c.o
 daemoncraft: CMakeFiles/daemoncraft.dir/core/upnp.c.o
 daemoncraft: CMakeFiles/daemoncraft.dir/core/web.c.o
 daemoncraft: CMakeFiles/daemoncraft.dir/build.make
 daemoncraft: CMakeFiles/daemoncraft.dir/compiler_depend.ts
 daemoncraft: CMakeFiles/daemoncraft.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/code-projects/packages/minecraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C executable daemoncraft"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/code-projects/packages/minecraft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking C executable daemoncraft"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/daemoncraft.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

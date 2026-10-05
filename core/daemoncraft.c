@@ -1,3 +1,5 @@
+// File 1
+
 #include <daemoncraft/core.h>
 
 char web_path[STR_LEN];
@@ -10,14 +12,16 @@ char cmd[256];
 int main(void)
 {
   printf("Starting DaemonCraft upstream...\n");
-  ip();
-  findport();
+  ip();  // File 2
+  findport();  // File 3
 
-  pubip();
+  pubip();  // File 4
 //  printf("The public IP is %s\n\n", ipv4);      // just here for reference
 
   printf("visit \033[34mhttp://%s:%s\033[0m in your browser\n", lan_ip, conf_port);
 
+  // this can only check if the process is running
+/*
   char jva[STR_LEN];
   char bdrk[STR_LEN];
   snprintf(jva, sizeof(jva), "nc -z -w 1 %s %s >/dev/null 2>&1", ipv4, JAVA);
@@ -28,9 +32,10 @@ int main(void)
 
   if (system(bdrk) != 0) printf("\n\033[31mPort %s not open.\033[0m Please do so. Moving on...\n\n", BDRCK);
   else printf("\nPort %s open!\n\n", BDRCK);
+*/
 
 //  prtfwd( 25565, 25565);  // uneeded now, but leaving it
 
   // change in here when testing
-  ip_bind();
+  ip_bind();  // File 5
 }

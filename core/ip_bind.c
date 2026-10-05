@@ -1,3 +1,5 @@
+// File 5
+
 #include <daemoncraft/core.h>
 
 void ip_bind(void)
@@ -30,10 +32,8 @@ void ip_bind(void)
     return;
   }
 
-    // 2. Pass the active socket into your monolith loop!
     // change here when testing
-
-  run_daemoncraft_monolith(sockfd);
+  run_daemoncraft_monolith(sockfd);  // File 6
 //  web(sockfd);  // not needed anymore, leaving for reference
 
   close(sockfd);

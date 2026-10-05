@@ -1,3 +1,5 @@
+// File 0
+
 // Anyone reading this, be aware how I made this work was that I did a symlink with the directory here to /usr/include/daemoncraft/ as that was the best way I could think of to get the headers seperate and not have code server think it's errors
 #define CORE_H
 
@@ -44,9 +46,13 @@ typedef struct
 } 
 SiteConfig;
 
+pid_t fork(void);
+
 void ip(void);
 void pubip(void);
 void ip_bind(void);
+//void start_inst(const char *instance_name, const char *edition, const char *path, const char *min, const char *max, const char *version, const char *conf_path);
+void start_inst(const char *instance_name);
 void findport(void);
 void run_daemoncraft_monolith(int sockfd);
 void handle_client_request(int client_fd, SiteConfig *site, const char *request_buffer);

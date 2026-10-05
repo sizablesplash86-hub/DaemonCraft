@@ -1,0 +1,10 @@
+Dedicated_Server.txt
+[2026-10-03 15:00:49:310 INFO] Starting Server
+[2026-10-03 15:00:49:310 INFO] Version: 1.26.52.3
+[2026-10-03 15:00:49:310 INFO] Session ID: e2f77c95-c409-4e30-a44a-57c934dc82b7
+[2026-10-03 15:00:49:310 INFO] Build ID: 51798919
+[2026-10-03 15:00:49:310 INFO] Branch: r/26_u5
+[2026-10-03 15:00:49:310 INFO] Commit ID: 54116bb5ee0b7aee0b5591efbcc8bc3cf64f168a
+[2026-10-03 15:00:49:310 INFO] Configuration: Publish
+[2026-10-03 15:00:49:310 ERROR] Error opening file: server.properties
+[2026-10-03 15:00:49:310 INFO] Server stop requested.

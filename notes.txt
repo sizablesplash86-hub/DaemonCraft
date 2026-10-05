@@ -5,6 +5,10 @@ cd ..
 ./daemoncraft
 
 
+sudo lsof -i :25569
+sudo kill PID
+
+
 # if doing first time
 
 # 1. Create a dedicated build directory to keep source code clean

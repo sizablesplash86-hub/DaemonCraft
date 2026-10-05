@@ -12,6 +12,7 @@ set(OLD_GLOB
   "/mnt/code-projects/packages/minecraft/core/ipv4.c"
   "/mnt/code-projects/packages/minecraft/core/lan_ip.c"
   "/mnt/code-projects/packages/minecraft/core/port.c"
+  "/mnt/code-projects/packages/minecraft/core/start_inst.c"
   "/mnt/code-projects/packages/minecraft/core/upnp.c"
   "/mnt/code-projects/packages/minecraft/core/web.c"
   )

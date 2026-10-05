@@ -9,6 +9,7 @@ daemoncraft: \
   CMakeFiles/daemoncraft.dir/core/ipv4.c.o \
   CMakeFiles/daemoncraft.dir/core/lan_ip.c.o \
   CMakeFiles/daemoncraft.dir/core/port.c.o \
+  CMakeFiles/daemoncraft.dir/core/start_inst.c.o \
   CMakeFiles/daemoncraft.dir/core/upnp.c.o \
   CMakeFiles/daemoncraft.dir/core/web.c.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a \
@@ -52,6 +53,8 @@ CMakeFiles/daemoncraft.dir/core/ipv4.c.o:
 CMakeFiles/daemoncraft.dir/core/lan_ip.c.o:
 
 CMakeFiles/daemoncraft.dir/core/port.c.o:
+
+CMakeFiles/daemoncraft.dir/core/start_inst.c.o:
 
 CMakeFiles/daemoncraft.dir/core/upnp.c.o:
 

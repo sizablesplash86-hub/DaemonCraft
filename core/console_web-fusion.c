@@ -1,3 +1,5 @@
+// File 6
+
 #include <daemoncraft/core.h>
 
 void run_daemoncraft_monolith(int sockfd)
@@ -30,23 +32,37 @@ void run_daemoncraft_monolith(int sockfd)
         if (strncmp(cmd, "start ", 6) == 0)
         {
           char *instance_name = cmd + 6;
-          printf("starting instance: %s...\n", instance_name);
-          // TODO: Send graceful stop to that specific Minecraft process pipe
+          char ls[512];
+          snprintf(ls, sizeof(ls), "ls /home/daemoncraft/instances/%s/ >/dev/null 2>&1", instance_name);
+          if (system(ls) != 0)
+          {
+            printf("%s not found\n", instance_name);
+            continue;
+          }
+          printf("Starting instance: %s...\n", instance_name);
+          // TODO: Send graceful start to that specific Minecraft process pipe
+          start_inst(instance_name);  // File 7
         } 
 
         if (strncmp(cmd, "stop ", 5) == 0)
         {
           char *instance_name = cmd + 5;
+          char ls[512];
+          snprintf(ls, sizeof(ls), "ls /home/daemoncraft/instances/%s/ >/dev/null 2>&1", instance_name);
+          if (system(ls) != 0)
+          {
+            printf("%s not found\n", instance_name);
+            continue;
+          }
           printf("Stopping instance: %s...\n", instance_name);
           // TODO: Send graceful stop to that specific Minecraft process pipe
         } 
         else if (strcmp(cmd, "exit") == 0 || strcmp(cmd, "quit") == 0)
         {
-          printf("Shutting down DaemonCraft monolith.\n");
+          printf("Stopping DaemonCraft...\n");
           break;
         }
 
-        // this is what I'm working on
         else if (strncmp(cmd, "create ", 5) == 0)
         {
           char port [6];
@@ -55,7 +71,16 @@ void run_daemoncraft_monolith(int sockfd)
           char mod[32];
           char min[4];
           char max[4];
+
           char *instance_name = cmd + 7;
+          char ls[512];
+          snprintf(ls, sizeof(ls), "ls /home/daemoncraft/instances/%s/ >/dev/null 2>&1", instance_name);
+          if (system(ls) == 0)
+          {
+            printf("%s already exists\n", instance_name);
+            continue;
+          }
+
           printf("Creating %s instance...\n", instance_name);
           
           printf("Java or Bedrock (type in lowercase): ");
@@ -101,7 +126,7 @@ void run_daemoncraft_monolith(int sockfd)
           fgets(port, sizeof(port), stdin);
           port[strcspn(port, "\r\n")] = 0;
             
-          create_minecraft_instance(instance_name, port, edition, version, mod, min, max);
+          create_minecraft_instance(instance_name, port, edition, version, mod, min, max);  // File 7
         }
         else if (strlen(cmd) > 0) printf("Unknown command: '%s'. Try 'stop [name]'.\n", cmd);
       }
@@ -135,7 +160,7 @@ void run_daemoncraft_monolith(int sockfd)
             char *name_ptr = strstr(body, "name=");
             if (name_ptr) sscanf(name_ptr, "name=%127[^&]", inst_name);
 
-          //  create_minecraft_instance(instance_name, port, edition, version, mod, min, max);   // change this for the JS HTML
+          //  create_minecraft_instance(instance_name, port, edition, version, mod, min, max);   // File 7    // change this for the JS HTML
           }
 
             // Respond back to the browser so it knows it succeeded
