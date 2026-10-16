@@ -9,6 +9,9 @@ sudo lsof -i :25569
 sudo kill PID
 
 
+ExecStart=/usr/bin/screen -DmS minecraft java -Xmx2G -jar server.jar nogui
+
+
 # if doing first time
 
 # 1. Create a dedicated build directory to keep source code clean

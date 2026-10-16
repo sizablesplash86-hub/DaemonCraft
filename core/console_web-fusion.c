@@ -40,7 +40,6 @@ void run_daemoncraft_monolith(int sockfd)
             continue;
           }
           printf("Starting instance: %s...\n", instance_name);
-          // TODO: Send graceful start to that specific Minecraft process pipe
           start_inst(instance_name);  // File 7
         } 
 
@@ -55,7 +54,7 @@ void run_daemoncraft_monolith(int sockfd)
             continue;
           }
           printf("Stopping instance: %s...\n", instance_name);
-          // TODO: Send graceful stop to that specific Minecraft process pipe
+          // TODO: create stop file
         } 
         else if (strcmp(cmd, "exit") == 0 || strcmp(cmd, "quit") == 0)
         {

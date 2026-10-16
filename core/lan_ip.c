@@ -12,7 +12,7 @@ void ip(void)
     {
       if (ifa->ifa_addr == NULL || ifa->ifa_addr->sa_family != AF_INET) continue;
 
-      if (strcmp(ifa->ifa_name, "lo") == 0 || strncmp(ifa->ifa_name, "wg", 2) == 0 || strncmp(ifa->ifa_name, "tailscale", 9) == 0 || strncmp(ifa->ifa_name, "docker", 6) == 0 || strncmp(ifa->ifa_name, "veth", 4) == 0) continue;
+      if (strcmp(ifa->ifa_name, "lo") == 0 || strncmp(ifa->ifa_name, "wg", 2) == 0 || strncmp(ifa->ifa_name, "tailscale", 9) == 0 || strncmp(ifa->ifa_name, "docker", 6) == 0 || strncmp(ifa->ifa_name, "veth", 4) == 0 || strncmp(ifa->ifa_name, "ipv6leakintrf", 13) == 0 || strncmp(ifa->ifa_name, "proton", 6)) continue;
 
       struct sockaddr_in *pAddr = (struct sockaddr_in *)ifa->ifa_addr;
       inet_ntop(AF_INET, &pAddr->sin_addr, lan_ip, sizeof(lan_ip));

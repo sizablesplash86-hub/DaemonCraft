@@ -3,6 +3,8 @@
 // Anyone reading this, be aware how I made this work was that I did a symlink with the directory here to /usr/include/daemoncraft/ as that was the best way I could think of to get the headers seperate and not have code server think it's errors
 #define CORE_H
 
+// https://gemini.google.com/app/69c4002854deeaa4
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,6 +19,7 @@
 #include <netinet/in.h>
 #include <bits/sockaddr.h>
 
+#define DMC_RLS "v0.1.0"  // DaemonCraft version
 #define FILE_SIZE 1024
 #define STR_LEN 256
 #define VER_JSON "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json"

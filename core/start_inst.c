@@ -103,6 +103,7 @@ void start_inst(const char *instance_name)
         perror("failed to start instance\n");
       }
     }  */
+  
     exit(0);
   } 
   else
