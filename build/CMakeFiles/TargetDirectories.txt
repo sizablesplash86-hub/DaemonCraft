@@ -1,3 +1,0 @@
-/mnt/code-projects/packages/minecraft/build/CMakeFiles/daemoncraft.dir
-/mnt/code-projects/packages/minecraft/build/CMakeFiles/edit_cache.dir
-/mnt/code-projects/packages/minecraft/build/CMakeFiles/rebuild_cache.dir
