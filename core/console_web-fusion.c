@@ -121,6 +121,7 @@ void run_daemoncraft_monolith(int sockfd)
             continue;
           }
 */
+
           printf("Enter port number: ");
           fgets(port, sizeof(port), stdin);
           port[strcspn(port, "\r\n")] = 0;
@@ -162,11 +163,9 @@ void run_daemoncraft_monolith(int sockfd)
           //  create_minecraft_instance(instance_name, port, edition, version, mod, min, max);   // File 7    // change this for the JS HTML
           }
 
-            // Respond back to the browser so it knows it succeeded
-            char *res = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"status\":\"success\"}";
-            write(client_fd, res, strlen(res));
-
-          printf("Not working\n");
+          // Respond back to the browser so it knows it succeeded
+          char *res = "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"status\":\"success\"}";
+          write(client_fd, res, strlen(res));
         }
 
         else

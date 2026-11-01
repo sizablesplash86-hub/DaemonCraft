@@ -34,6 +34,7 @@ void ip_bind(void)
     return;
   }
 
+//  test(sockfd);
   upstream(sockfd);
 
   close(sockfd);  // requires unistd for some reason. C.56.5.5 p.1159
