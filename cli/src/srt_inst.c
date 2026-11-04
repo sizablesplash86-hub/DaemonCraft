@@ -1,51 +1,10 @@
 #include "config.h"
 
-int srt_inst(const char *inst_name)
+int srt_inst(const char *inst_name, const char *inst_path, const char *inst_edition, const char *inst_version, const char *inst_mod, const char *inst_min, const char *inst_max)
 {
-  char inst_path[128];
-  snprintf(inst_path, sizeof(inst_path), "%s/%s", INSTS_ROOT, inst_name);
-  
-  TODO: // add the file opening code here
-  printf("Opening config...\n");
-
-  char inst_conf[256], log_path[256], fifo_path[256], jar_path[256], pid_file[256];
-  snprintf(inst_conf, sizeof(inst_conf), "%s/%s.conf", inst_path, inst_name);
-  FILE *fp = fopen(inst_conf, "r");
-  if (fp == NULL)
-  {
-    printf("Failed to open config file\n");
-    return -1;
-  }
-
-  char line[1024];
-  int found = 0;
-  while(fgets(line, sizeof(line), fp) != NULL)
-  {
-    if (strncmp(line, "vers = ", 7) == 0)
-    {
-      found = 1;
-      break;
-    }
-  }
-  fclose(fp);
-
-  char *version = line + 7;
-  if (found)
-  {
-    line[strcspn(line, ";\r\n")] = 0;
-    printf("Instance version is %s...\n", version);
-  }
-
-  else
-  {
-    printf("Version not found\n");
-    return -1;
-  }
+  char log_path[256], fifo_path[256], jar_path[256], pid_file[256];
   
   printf("starting %s...\n", inst_name);
-
-//  return;  // remove this
-
 
   int pipe_stdout[2]; // Child writes, parent reads (Logs)
   int pipe_stdin[2];  // Parent writes, child reads (Commands)
@@ -54,11 +13,10 @@ int srt_inst(const char *inst_name)
   pipe(pipe_stdin);
 
   pid_t pid = fork();
+  
   if (pid == 0)
   {
-    setsid();
-
-    // --- CHILD PROCESS ---
+    setsid();  // Makes it seperate. Want for DaemonCraft (right now), don't want for SpyderFly.
     
     // Redirect stdout and stderr to the write end of the stdout pipe
     dup2(pipe_stdout[1], STDOUT_FILENO);
@@ -70,12 +28,39 @@ int srt_inst(const char *inst_name)
     // Close unused file descriptors in the child
     close(pipe_stdout[0]);
     close(pipe_stdin[1]);
-    
-    char jar_arg[128];
-    snprintf(jar_arg, sizeof(jar_arg), "%s/server_%s.jar", inst_path, version);
+
     chdir(inst_path);
-    execlp("java", "java", "-jar", jar_arg, "nogui", (char *)NULL);
+    if (strcmp(inst_edition, "java") == 0 || strcmp(inst_edition, "Java") == 0)
+    {
+      char xms_arg[128], xmx_arg[128], jar_arg[512];
+      snprintf(jar_arg, sizeof(jar_arg), "%s/server.jar", inst_path);
+      snprintf(xms_arg, sizeof(xms_arg), "-Xms%s", inst_min);
+      snprintf(xmx_arg, sizeof(xmx_arg), "-Xmx%s", inst_max);
+      printf(
+        "Jar path: %s\n"
+        "Min ram: %s\n"
+        "Max ram: %s\n",
+        jar_arg, xms_arg, xmx_arg
+      );
+
+      if (execlp("java", "java", xms_arg, xmx_arg, "-jar", jar_arg, "nogui", NULL) != 0)
+      {
+        fprintf(stdout, "Failed to start Instance\n");
+        return -1;
+      }
+      else fprintf(stdout, "Started instance\n");
+    }
+    if (strcmp(inst_edition, "bedrock") == 0 || strcmp(inst_edition, "Bedrock") == 0)
+    {
+      if (execlp("LD_LIBRARY_PATH=. ", "./bedrock_server", NULL) != 0)
+      {
+        fprintf(stderr, "Failed to start %s\n", inst_name);
+        return -1;
+      }
+      else fprintf(stderr, "Started %s\n", inst_name);
+    }
     exit(1);
+
   }
   else
   {

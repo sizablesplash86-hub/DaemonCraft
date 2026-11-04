@@ -18,15 +18,21 @@ int stop_inst(const char *inst_name)
 
   fclose(pd);
 
+  pid[strcspn(pid, "\r\n")] = 0;
+
   printf("PID = %s\n", pid);
 
-  char kill[64];
-  snprintf(kill, sizeof(kill), "sudo kill %s", pid);
-  if (system(pid) != 0)
+  int pid_num = atoi(pid);
+
+  if (kill(pid_num, SIGTERM) != 0) 
   {
-    printf("Failed to kill instance\n");
+    printf("Failed to stop %s\n", inst_name);
     return -1;
   }
+
+  else printf("Successfully stopped %s\n", inst_name);
+
+  if (remove(pid_file) != 0) printf("Failed to remove PID file\n");
 
   return 0;
 }

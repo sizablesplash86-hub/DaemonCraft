@@ -1,8 +1,9 @@
 #include "config.h"
+#include <linux/limits.h>
 
 int mng_insts(void)
 {
-  printf("\nWelcome to DaemonCraft CLI manager!\nRun 'help' to see a list of commands\n\n");
+  printf("\nWelcome to %s CLI manager!\nRun 'help' to see a list of commands\n\n", NAME);
   while (1)
   {
     fd_set read_fds;
@@ -25,7 +26,8 @@ int mng_insts(void)
             "  'stop [instance_name]'      stops an instance\n"
             "  'start [instance_name]'     starts an instance\n"
             "  'create [instance_name]'    create a new instance\n"
-            "  'delete [instance_name]'    deletes an entire instance\n\n"
+            "  'delete [instance_name]'    deletes an entire instance\n"
+            "  'eula [instance_name]'      signs the EULA for an instance\n\n"
 
             "  'nuke'        kills all active instances\n"
             "  'big-bang'    starts all instances\n"
@@ -66,7 +68,8 @@ int mng_insts(void)
             printf("%s does not exist\n", inst_name);
             continue;
           }
-          srt_inst(inst_name);
+//          srt_inst(inst_name);
+          inst_conf_file(inst_name, inst_path);
         }
 
         else if (strncmp(cmd, "stop ", 5) == 0)
@@ -80,15 +83,18 @@ int mng_insts(void)
             printf("%s does not exist\n", inst_name);
             continue;
           }
-          stop_inst(inst_name);
+          if (stop_inst(inst_name) != 0)
+          {
+            printf("Failed to stop %s\n", inst_name);
+            continue;
+          }
         }
 
-        else if (strncmp(cmd, "delete ", 7) == 0)
+        else if (strncmp(cmd, "delete ", 7) == 0 || strncmp(cmd, "remove ", 7) == 0)
         {
           char *inst_name = cmd + 7;
           char inst_path[256];
           snprintf(inst_path, sizeof(inst_path), "%s/%s", INSTS_ROOT, inst_name);
-          printf("%s\n", inst_path);
           struct stat st;
           if (stat(inst_path, &st) != 0)
           {
@@ -103,6 +109,7 @@ int mng_insts(void)
             char rm[256];
             snprintf(rm, sizeof(rm), "sudo rm -r %s", inst_path);
             if (system(rm) != 0)
+//            if (rmdir(inst_path) != 0)
             {
               printf("Failed to delete %s\n", inst_name);
               continue;
@@ -139,10 +146,58 @@ int mng_insts(void)
           TODO2: // add the stuff to start all
         }
 
-        else if (strcmp(cmd, "") == 0)
+        else if (strncmp(cmd, "eula ", 5) == 0)
         {
-          printf("Gotta enter something, brah\n");
+          char *inst_name = cmd + 5;
+          char inst_path[256];
+          snprintf(inst_path, sizeof(inst_path), "%s/%s", INSTS_ROOT, inst_name);
+          struct stat st;
+          if (stat(inst_path, &st) != 0)
+          {
+            printf("%s does not exist\n", inst_name);
+            continue;
+          }
+          printf("By pressing enter, you agree to the Mojang End User License Agreement at https://www.minecraft.net/en-us/eula\nEnter 'q' to exit or enter to agree ");
+          char agr;
+          scanf("%c", &agr);
+          if (agr == 'q')
+          {
+            printf("Eula not signed. Exiting now...\n");
+            continue;
+          }
+          else
+          {
+            char eula[512];
+            snprintf(eula, sizeof(eula), "%s/eula.txt", inst_path);
+            FILE *eul = fopen(eula, "w");
+            printf("[*] Signing EULA...\n");
+            if (eul == NULL)
+            {
+              printf("Failed to create EULA\n");
+              continue;
+            }
+            else
+            {
+              fprintf(eul, "eula=true\n");
+              fclose(eul);
+
+              printf("[*] Wrote EULA. Would you like to start %s? (y/n): ", inst_name);
+              int c;
+              while ((c = getchar()) != '\n' && c != EOF);
+              
+              char srt;
+              scanf("%c", &srt);
+              if (srt == 'y') inst_conf_file(inst_name, inst_path);
+              if (srt == 'n')
+              {
+                printf("Not starting %s\n", inst_name);
+                continue;
+              }
+            }
+          }
         }
+
+        else if (strcmp(cmd, "") == 0) continue;
 
         else printf ("Error! '%s' not a valid command\n", cmd);
       }

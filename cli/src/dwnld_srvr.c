@@ -11,7 +11,7 @@ size_t write_to_file(void *ptr, size_t size, size_t nmemb, FILE *stream)
 
 int extrct_bds(const char *inst_path, const char *output, const char *vers)
 {
-  printf("Disclaimer! This part uses unzip and system(); because I cannot figure out how to do it otherwise. This makes it exclusive to Debuntu Distros\n");
+  printf("\n[*] Disclaimer! This part uses unzip and system(); because I cannot figure out how to do it otherwise. This makes it exclusive to Debuntu Distros\n\n");
 
   if (system("unzip > /dev/null") != 0)
   {
@@ -22,7 +22,7 @@ int extrct_bds(const char *inst_path, const char *output, const char *vers)
       return -1;
     }
   }
-
+/*
   char dwnld[512];
   snprintf(dwnld, sizeof(dwnld), "wget %s/%s.zip -O %s/server.zip", BEDROCK_REPOS, vers, inst_path);
   if (system(dwnld) != 0)
@@ -30,9 +30,11 @@ int extrct_bds(const char *inst_path, const char *output, const char *vers)
     printf("Failed to download BDS\n");
     return -1;
   }
-
+*/
   char extrct[512];
-  snprintf(extrct, sizeof(extrct), "unzip -d %s/server.zip %s/", inst_path, inst_path);
+  snprintf(extrct, sizeof(extrct), "unzip -q -o %s/server.zip -d %s", inst_path, inst_path);
+  printf("By pressing enter you agree to the Mojang End User License Agreement (EULA) at https://www.minecraft.net/en-us/eula: ");
+  getchar();
   if (system(extrct) != 0)
   {
     printf("Failed to extract BDS zip\n");
@@ -97,7 +99,7 @@ int dwnld_srvr(const char *inst_path, const char *vers, const char *edition)
   char url[512];
   if (strcmp(edition, "java") == 0 || strcmp(edition, "Java") == 0)
   {
-    snprintf(output, sizeof(output), "%s/server_%s.jar", inst_path, vers);
+    snprintf(output, sizeof(output), "%s/server.jar", inst_path);
     snprintf(url, sizeof(url), "%s/server_%s.jar", JAVA_REPOS, vers);
   }
 
