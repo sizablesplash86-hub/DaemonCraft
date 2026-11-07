@@ -8,19 +8,15 @@ typedef struct {
     char max[20];
 } ServerConfig;
 
-// Function to pull the next logical token from the file stream,
-// handling whitespace, comments (#), and punctuation ({, }, ;)
 int next_token(FILE *fp, char *buf, size_t max_len)
 {
   int c;
   size_t len = 0;
 
-  // 1. Skip whitespace and comments
   while ((c = fgetc(fp)) != EOF)
   {
     if (c == '#')
     {
-      // Skip until end of line
       while ((c = fgetc(fp)) != EOF && c != '\n');
       continue;
     }
@@ -33,7 +29,6 @@ int next_token(FILE *fp, char *buf, size_t max_len)
 
   if (c == EOF) return 0;
 
-  // 2. Check for structural single-character tokens
   c = fgetc(fp);
   if (c == '{' || c == '}' || c == ';')
   {
@@ -42,7 +37,6 @@ int next_token(FILE *fp, char *buf, size_t max_len)
     return 1;
   }
 
-  // 3. Read a standard word token (directive name, path, value, etc.)
   ungetc(c, fp);
   while ((c = fgetc(fp)) != EOF)
   { 
@@ -60,7 +54,6 @@ int next_token(FILE *fp, char *buf, size_t max_len)
   return len > 0 ? 1 : 0;
 }
 
-// Function to parse the config file stream into a ServerConfig struct
 int parse_config(const char *inst_conf, ServerConfig *config)
 {
   FILE *fp = fopen(inst_conf, "r");
@@ -74,7 +67,6 @@ int parse_config(const char *inst_conf, ServerConfig *config)
 
   while (next_token(fp, token, sizeof(token)))
   {
-    // Parse known directives
     if (strcmp(token, "edition") == 0)
     {
       if (next_token(fp, token, sizeof(token)))
@@ -130,7 +122,6 @@ int inst_conf_file(const char *inst_name, const char *inst_path)
 
   ServerConfig cfg = {0};
 
-  // Assuming you drop your block config into a test file
   if (parse_config(inst_conf, &cfg) == 0)
   {
     printf("Successfully Parsed Config:\n"
